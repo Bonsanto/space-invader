@@ -1,3 +1,4 @@
+//todo: add the game mode.
 var input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
@@ -102,7 +103,7 @@ var update = function () {
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
-	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y, 0, -8, 3, 9, "steelblue", 0));
+	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
 
 	//limitations for the tank position
 	bullets.forEach(function (bullet, bulletIndex) {
@@ -157,7 +158,7 @@ var update = function () {
 				randomAlien = alien;
 			}
 		});
-		bullets.push(new Bullet(randomAlien.x + randomAlien.w / 2, randomAlien.y + randomAlien.h, 0, 4, 2, 4, "pink", 0));
+		bullets.push(new Bullet(randomAlien.x + randomAlien.w / 2, randomAlien.y + randomAlien.h, 0, 8, 2, 4, "pink", 0));
 	}
 
 	tank.x = Math.max(Math.min(tank.x, field.w - (30 + tankSprite.w)), 30);
