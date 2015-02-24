@@ -49,10 +49,9 @@ var init = function () {
 			this.canvas.height = this.h;
 			this.ctx = this.canvas.getContext("2d");
 
-			for (var i = 0; i < 4; i++) {
+			for (var i = 0; i < 4; i++)
 				this.ctx.drawImage(citySprite.img, citySprite.x, citySprite.y, citySprite.w,
 					citySprite.h, 68 + 111 * i, 0, citySprite.w, citySprite.h);
-			}
 		},
 		generateDamage: function (x, y) {
 			x = Math.floor(x / 2) * 2;
@@ -82,13 +81,9 @@ var init = function () {
 
 	rows.forEach(function (element, index) {
 		for (var i = 0; i < 10; i++) {
-			aliens.push({
-				sprite: alienSprite[element],
-				x: 30 + i * 30 + [0, 4, 0][element],
-				y: 30 + index * 30,
-				w: alienSprite[element][0].w,
-				h: alienSprite[element][0].h
-			});
+			aliens.push(new Alien(alienSprite[element],
+				30 + i * 30 + [0, 4, 0][element], 30 + index * 30, //[0,4,0] for adding a gap between the aliens
+				alienSprite[element][0].w, alienSprite[element][0].h));
 		}
 	});
 };
@@ -98,13 +93,9 @@ var run = function () {
 		update();
 		render();
 
-		if (window.requestAnimationFrame) {
-			window.requestAnimationFrame(loop, field.canvas);
-		} else alert("problems");
-	};
-	if (window.requestAnimationFrame) {
 		window.requestAnimationFrame(loop, field.canvas);
-	} else alert("problems");
+	};
+	window.requestAnimationFrame(loop, field.canvas);
 };
 
 var update = function () {
@@ -120,7 +111,7 @@ var update = function () {
 		//If the bullet is outside of the map
 		if (bullet.y + bullet.h < 0 || bullet.y > field.h ||
 			bullet.x < 0 || bullet.x + bullet.h > field.x) {
-			bullets.splice(bulletIndex, 1)
+			bullets.splice(bulletIndex, 1);
 		}
 
 		//If the bullet hits a cities
@@ -128,6 +119,11 @@ var update = function () {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
 			}
+		}
+
+		//If the bullet hits the tank
+		if (tank.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < tank.y + tank.h) {
+			bullets.splice(bulletIndex, 1);
 		}
 
 		aliens.forEach(function (alien, alienIndex) {

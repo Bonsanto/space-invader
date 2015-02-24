@@ -12,6 +12,16 @@ var alienBulletCollision = function (alien, bullet) {
 		alien.y < bullet.y + bullet.h && bullet.y < alien.y + alien.h;
 };
 
+
+// Alien class.
+var Alien = function (sprite, x, y, w, h) {
+	this.sprite = sprite;
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+};
+
 // Screen Class.
 var Screen = function (w, h) {
 	this.canvas = document.createElement("canvas");
