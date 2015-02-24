@@ -118,7 +118,7 @@ var update = function () {
 		}
 
 		//If the bullet hits the tank
-		if (tank.x < bullet.x + bullet.h && tank.y < bullet.y + bullet.h) {
+		if (bullet.x + bullet.w > tank.x && bullet.x < tank.x + tank.w && bullet.y + bullet.h > tank.y) {
 			bullets.splice(bulletIndex, 1);
 		}
 
@@ -149,7 +149,7 @@ var update = function () {
 		});
 	});
 
-	if (Math.random() < 0.03 && !aliens.isEmpty()) {
+	if (Math.random() < 0.80 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
 		aliens.forEach(function (alien) {
