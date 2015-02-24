@@ -22,6 +22,16 @@ var Alien = function (sprite, x, y, w, h) {
 	this.h = h;
 };
 
+//tank class
+var Tank = function (sprite, x, y, speed) {
+	this.sprite = sprite;
+	this.x = x;
+	this.y = y;
+	this.w = this.sprite.w;
+	this.h = this.sprite.h;
+	this.speed = speed;
+};
+
 // Screen Class.
 var Screen = function (w, h) {
 	this.canvas = document.createElement("canvas");

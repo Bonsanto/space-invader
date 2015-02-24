@@ -33,12 +33,7 @@ var init = function () {
 	spFrame = 0;
 	lvFrame = 30;
 	frames = 0;
-	tank = {
-		sprite: tankSprite,
-		x: (field.w - tankSprite.w) / 2,
-		y: field.h - (30 + tankSprite.h),
-		speed: 6
-	};
+	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
 	cities = {
 		canvas: {},
 		ctx: {},
@@ -127,6 +122,7 @@ var update = function () {
 			bullets.splice(bulletIndex, 1);
 		}
 
+		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {
 			if (alienBulletCollision(bullet, alien)) {
 				aliens.splice(alienIndex, 1);
@@ -136,11 +132,14 @@ var update = function () {
 					case 30:
 						lvFrame = 40;
 						break;
+					case 20:
+						lvFrame = 30;
+						break;
 					case 10:
 						lvFrame = 20;
 						break;
 					case 5:
-						lvFrame = 15;
+						lvFrame = 10;
 						break;
 					case 1:
 						lvFrame = 6;
@@ -161,6 +160,7 @@ var update = function () {
 		bullets.push(new Bullet(randomAlien.x + randomAlien.w / 2, randomAlien.y + randomAlien.h, 0, 8, 2, 4, "pink", 0));
 	}
 
+	//Limits for the tank position (avoid to pass the borders)
 	tank.x = Math.max(Math.min(tank.x, field.w - (30 + tankSprite.w)), 30);
 	frames++;
 
@@ -170,6 +170,7 @@ var update = function () {
 			max = 0;
 		spFrame = (spFrame + 1) % 2;
 
+		//moves the aliens
 		aliens.forEach(function (element) {
 			element.x += 30 * direction;
 			max = Math.max(max, element.x + element.w);
