@@ -122,7 +122,7 @@ var update = function () {
 		}
 
 		//If the bullet hits the tank
-		if (tank.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < tank.y + tank.h) {
+		if (tank.x < bullet.x + bullet.h && tank.y < bullet.y + bullet.h) {
 			bullets.splice(bulletIndex, 1);
 		}
 
