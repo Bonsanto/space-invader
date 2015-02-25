@@ -30,6 +30,7 @@ var Tank = function (sprite, x, y, speed) {
 	this.w = this.sprite.w;
 	this.h = this.sprite.h;
 	this.speed = speed;
+	this.life = 50;
 };
 
 // Screen Class.

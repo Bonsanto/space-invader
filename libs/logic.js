@@ -120,6 +120,8 @@ var update = function () {
 		//If the bullet hits the tank
 		if (bullet.x + bullet.w > tank.x && bullet.x < tank.x + tank.w && bullet.y + bullet.h > tank.y) {
 			bullets.splice(bulletIndex, 1);
+			tank.life--;
+			if (tank.life === 0) alert("You lost");
 		}
 
 		//Here is where the game speed is increased.
@@ -149,7 +151,7 @@ var update = function () {
 		});
 	});
 
-	if (Math.random() < 0.80 && !aliens.isEmpty()) {
+	if (Math.random() < 0.50 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
 		aliens.forEach(function (alien) {
