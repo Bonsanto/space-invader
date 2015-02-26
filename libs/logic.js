@@ -98,7 +98,7 @@ var update = function () {
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
-	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
+	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 0));
 
 	//limitations for the tank position
 	bullets.forEach(function (bullet, bulletIndex) {
@@ -151,7 +151,7 @@ var update = function () {
 		});
 	});
 
-	if (Math.random() < 0.50 && !aliens.isEmpty()) {
+	if (Math.random() < 0.90 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
 		aliens.forEach(function (alien) {
