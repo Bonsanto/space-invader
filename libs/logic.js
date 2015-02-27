@@ -25,6 +25,9 @@ var main = function () {
 	picture.src = "pics/sprites.png";
 };
 
+//soundtrack
+soundtrack.play();
+
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
 	aliens = [];
@@ -98,8 +101,11 @@ var update = function () {
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
-	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
-
+	if (input.isPressed(32))
+	{
+		tankshot.cloneNode(true).play(); //the cloneNode(true) makes the sound to reload fast
+		bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
+	}
 	//limitations for the tank position
 	bullets.forEach(function (bullet, bulletIndex) {
 		bullet.update();
@@ -114,6 +120,7 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
+				cityhit.cloneNode(true).play();
 			}
 		}
 
@@ -121,12 +128,14 @@ var update = function () {
 		if (bullet.x + bullet.w > tank.x && bullet.x < tank.x + tank.w && bullet.y + bullet.h > tank.y) {
 			bullets.splice(bulletIndex, 1);
 			tank.life--;
+			tankhit.cloneNode(true).play();
 			if (tank.life === 0) alert("You lost");
 		}
 
 		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {
 			if (alienBulletCollision(bullet, alien)) {
+				alienhit.cloneNode(true).play();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
 
@@ -151,7 +160,7 @@ var update = function () {
 		});
 	});
 
-	if (Math.random() < 0.50 && !aliens.isEmpty()) {
+	if (Math.random() < 0.04 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
 		aliens.forEach(function (alien) {
@@ -160,6 +169,7 @@ var update = function () {
 			}
 		});
 		bullets.push(new Bullet(randomAlien.x + randomAlien.w / 2, randomAlien.y + randomAlien.h, 0, 8, 2, 4, "pink", 0));
+		alienshot.cloneNode(true).play();
 	}
 
 	//Limits for the tank position (avoid to pass the borders)
