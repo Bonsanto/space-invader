@@ -5,3 +5,5 @@
 var tankshot = new Audio();
 tankshot.src = "libs/soundEffects/tankShot2.wav";
 
+var cityhit = new Audio();
+cityhit.src = "libs/soundEffects/city1.mp3";

@@ -66,6 +66,7 @@ var init = function () {
 			y -= this.y;
 			var data = this.ctx.getImageData(x, y, 1, 1);
 			if (data["data"][3] !== 0) {
+				cityhit.cloneNode(true).play();
 				this.generateDamage(x, y);
 				return true;
 			}
