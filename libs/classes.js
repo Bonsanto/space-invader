@@ -108,3 +108,6 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 		this.y += this.ySpeed;
 	};
 };
+
+var tankshot = new Audio();
+tankshot.src = "./soundEffects/tankShot1.wav";
