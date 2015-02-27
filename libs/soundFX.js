@@ -16,4 +16,7 @@ var tankhit = new Audio();
 tankhit.src = "libs/soundEffects/tankhit1.mp3";
 
 var alienshot = new Audio();
-alienshot.src ="libs/soundEffects/alienshot1.mp3";
+alienshot.src = "libs/soundEffects/alienshot1.mp3";
+
+var alienhit = new Audio();
+alienhit.src = "libs/soundEffects/alienhit1.mp3";

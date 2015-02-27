@@ -69,7 +69,6 @@ var init = function () {
 			y -= this.y;
 			var data = this.ctx.getImageData(x, y, 1, 1);
 			if (data["data"][3] !== 0) {
-				cityhit.cloneNode(true).play();
 				this.generateDamage(x, y);
 				return true;
 			}
@@ -121,6 +120,7 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
+				cityhit.cloneNode(true).play();
 			}
 		}
 
@@ -135,6 +135,7 @@ var update = function () {
 		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {
 			if (alienBulletCollision(bullet, alien)) {
+				alienhit.cloneNode(true).play();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
 
