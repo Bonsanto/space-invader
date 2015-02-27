@@ -155,7 +155,7 @@ var update = function () {
 		});
 	});
 
-	if (Math.random() < 0.50 && !aliens.isEmpty()) {
+	if (Math.random() < 0.04 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
 		aliens.forEach(function (alien) {
