@@ -98,8 +98,11 @@ var update = function () {
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
-	if (input.isPressed(32)) bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
-
+	if (input.isPressed(32))
+	{
+		tankshot.cloneNode(true).play(); //the cloneNode(true) makes the sound to reload fast
+		bullets.push(new Bullet(tank.x + tankSprite.w / 2, tank.y - 3, 0, -16, 3, 9, "steelblue", 0));
+	}
 	//limitations for the tank position
 	bullets.forEach(function (bullet, bulletIndex) {
 		bullet.update();
