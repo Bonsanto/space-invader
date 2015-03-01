@@ -20,6 +20,10 @@ var Alien = function (sprite, x, y, w, h) {
 	this.y = y;
 	this.w = w;
 	this.h = h;
+
+	this.hitted = function () {
+		alienhit.cloneNode(true).play();
+	};
 };
 
 //tank class
@@ -31,6 +35,13 @@ var Tank = function (sprite, x, y, speed) {
 	this.h = this.sprite.h;
 	this.speed = speed;
 	this.life = 50;
+
+	this.hitted = function (damageBullet) {
+		this.life -= damageBullet;
+		tankhit.cloneNode(true).play();
+
+		if(this.life === 0) alert("You LOST");
+	};
 };
 
 // Screen Class.
@@ -48,7 +59,7 @@ var Screen = function (w, h) {
 
 	this.drawBullet = function (bullet) {
 		this.ctx.fillStyle = bullet.color;
-		if (bullet.type === 0) this.ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+		 this.ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
 	};
 
 	this.clear = function () {
@@ -103,8 +114,17 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 	this.color = color;
 	this.type = type;
 
+
+	var shoot = function (type) {
+		// 0 is an alien 1 is a tank
+		type === 0 ?
+			alienshot.cloneNode(true).play() : tankshot.cloneNode(true).play();
+	};
+
 	this.update = function () {
 		this.x += this.xSpeed;
 		this.y += this.ySpeed;
 	};
+
+	shoot(this.type);
 };
