@@ -1,3 +1,21 @@
+.body {
+	background-image: url('../pics/stars.bmp');
+}
+
+.menu {
+	background-color: black;
+	display: block;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	right: 0;
+	width: 504px;
+	height: 600px;
+}
+
 canvas {
 	background-color: black;
 	display: block;
