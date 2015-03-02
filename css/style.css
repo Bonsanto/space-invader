@@ -1,8 +1,15 @@
+@font-face {
+	font-family: "hobo";
+	src: url("../fonts/hobo.ttf");
+}
+
 .body {
 	background-image: url('../pics/stars.bmp');
 }
 
 .menu {
+	font-family: "hobo", Arial, "Times New Roman", serif;
+	color: aliceblue;
 	background-color: black;
 	display: block;
 	position: absolute;
@@ -10,7 +17,6 @@
 	top: 0;
 	bottom: 0;
 	left: 0;
-	right: 0;
 	right: 0;
 	width: 504px;
 	height: 600px;

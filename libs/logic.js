@@ -23,10 +23,12 @@ var main = function () {
 	};
 
 	picture.src = "pics/sprites.png";
-};
 
-//soundtrack
-soundtrack.play();
+	//remove the menu
+	document.body.removeChild(document.querySelector(".menu"));
+	//soundtrack
+	soundtrack.play();
+};
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
