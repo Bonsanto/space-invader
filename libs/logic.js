@@ -126,15 +126,14 @@ var update = function () {
 		//If the bullet hits the tank
 		if (bullet.x + bullet.w > tank.x && bullet.x < tank.x + tank.w && bullet.y + bullet.h > tank.y) {
 			bullets.splice(bulletIndex, 1);
-			tank.life--;
-			tankhit.cloneNode(true).play();
-			if (tank.life === 0) alert("You lost");
+			tank.hitted(1);
 		}
 
 		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {
+			//if the alien is shot
 			if (alienBulletCollision(bullet, alien)) {
-				alienhit.cloneNode(true).play();
+				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
 
@@ -159,6 +158,7 @@ var update = function () {
 		});
 	});
 
+	//random shoots from aliens
 	if (Math.random() < 0.04 && !aliens.isEmpty()) {
 		var randomAlien = aliens[Math.round(Math.random() * (aliens.length - 1))];
 
@@ -168,7 +168,6 @@ var update = function () {
 			}
 		});
 		bullets.push(new Bullet(randomAlien.x + randomAlien.w / 2, randomAlien.y + randomAlien.h, 0, 8, 2, 4, "pink", 0));
-		alienshot.cloneNode(true).play();
 	}
 
 	//Limits for the tank position (avoid to pass the borders)
