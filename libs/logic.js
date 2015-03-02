@@ -25,9 +25,10 @@ var main = function () {
 	picture.src = "pics/sprites.png";
 
 	//remove the menu
-	document.body.removeChild(document.querySelector(".menu"));
+	document.body.removeChild(document.querySelector("div"));
 	//soundtrack
-	soundtrack.play();
+	menuSoundtrack.pause();
+	gameSoundtrack.play();
 };
 
 var init = function () {

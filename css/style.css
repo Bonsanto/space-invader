@@ -3,11 +3,11 @@
 	src: url("../fonts/hobo.ttf");
 }
 
-.body {
+body {
 	background-image: url('../pics/stars.bmp');
 }
 
-.menu {
+div {
 	font-family: "hobo", Arial, "Times New Roman", serif;
 	color: aliceblue;
 	background-color: black;
@@ -20,6 +20,40 @@
 	right: 0;
 	width: 504px;
 	height: 600px;
+}
+
+div label {
+	font-family: "hobo", Arial, "Times New Roman", serif;
+	font-size: larger;
+	color: aliceblue;
+	background-color: black;
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+
+div input {
+	font-family: "hobo", Arial, "Times New Roman", serif;
+	font-size: larger;
+	color: aliceblue;
+	background-color: black;
+	display: block;
+	margin: auto;
+}
+
+div button {
+	font-family: "hobo", Arial, "Times New Roman", serif;
+	font-size: x-large;
+	color: aliceblue;
+	background-color: black;
+	display: block;
+	margin: auto;
+	vertical-align: middle;
+}
+
+div button:hover {
+	color: aliceblue;
+	background-color: dimgray;
 }
 
 canvas {

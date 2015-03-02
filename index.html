@@ -8,11 +8,16 @@
 	<script src="libs/logic.js"></script>
 	<link rel="stylesheet" href="css/style.css"/>
 </head>
-<body class="body">
-<div class="menu">
-	<button onclick="main()">GO!</button>
+<body>
+<div>
+	<label for="user">Enter your name</label>
+	<p>
+		<input type="text" value="your name" id="user" onclick="this.value = '';"/>
+	</p>
+	<button onclick="main()">PLAY!</button>
 </div>
 <script>
+	menuSoundtrack.play();
 </script>
 </body>
 </html>
