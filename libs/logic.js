@@ -106,7 +106,7 @@ var update = function () {
 	//todo: solve small problem with the difference between the middle and real bullet position.
 	if (input.isPressed(32)) {
 		tankshot.cloneNode(true).play(); //the cloneNode(true) makes the sound to reload fast
-		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 0));
+		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 1));
 	}
 	//limitations for the tank position
 	bullets.forEach(function (bullet, bulletIndex) {
