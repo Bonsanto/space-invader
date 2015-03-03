@@ -134,7 +134,7 @@ var update = function () {
 		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {
 			//if the alien is shot
-			if (alienBulletCollision(bullet, alien)) {
+			if (alienBulletCollision(bullet, alien) && bullet.type === 1) {
 				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
