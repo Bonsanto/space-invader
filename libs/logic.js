@@ -1,10 +1,10 @@
-var player, input, field, frames, spFrame, lvFrame,
+var paused, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
 
 var main = function (name, mode) {
 	player = new Player(name, 0, mode);
-	field = new Screen(504, 800);
+	field = new Screen(504, 700);
 	input = new InputHandler();
 	var picture = new Image();
 
@@ -23,11 +23,9 @@ var main = function (name, mode) {
 
 	picture.src = "pics/sprites.png";
 
-	//remove the menu
-	document.body.removeChild(document.querySelector("div"));
 	//soundtrack
 	menuSoundtrack.pause();
-	//gameSoundtrack.play();
+	gameSoundtrack.play();
 };
 
 var init = function () {
@@ -83,7 +81,7 @@ var init = function () {
 	rows.forEach(function (element, index) {
 		for (var i = 0; i < 10; i++) {
 			aliens.push(new Alien(alienSprite[element],
-				30 + i * 30 + [0, 4, 0][element], 130 + index * 30, //[0,4,0] for adding a gap between the aliens
+				30 + i * 30 + [0, 4, 0][element], 100 + index * 30, //[0,4,0] for adding a gap between the aliens
 				alienSprite[element][0].w, alienSprite[element][0].h, 50 - element * 10));
 		}
 	});
@@ -94,12 +92,37 @@ var run = function () {
 		update();
 		render();
 
-		window.requestAnimationFrame(loop, field.canvas);
+		if (!paused)
+			window.requestAnimationFrame(loop, field.canvas);
+		else {
+			var listener = setInterval(function () {
+				if (input.isPressed(80)) {
+					resume();
+					clearInterval(listener);
+					window.requestAnimationFrame(loop, field.canvas);
+				}
+			}, 20)
+		}
 	};
 	window.requestAnimationFrame(loop, field.canvas);
 };
 
+var pause = function () {
+	document.querySelectorAll("div")[1].style.visibility = "visible";
+	document.querySelector("canvas").style.visibility = "hidden";
+	gameSoundtrack.pause();
+	paused = true;
+};
+
+var resume = function () {
+	document.querySelectorAll("div")[1].style.visibility = "hidden";
+	document.querySelector("canvas").style.visibility = "visible";
+	gameSoundtrack.play();
+	paused = false;
+};
+
 var update = function () {
+	if (input.isPressed(80)) pause();
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
