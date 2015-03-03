@@ -1,12 +1,12 @@
 //todo: add the game mode.
-var input, field, frames, spFrame, lvFrame,
+var player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
 
-var main = function () {
+var main = function (name, mode) {
+	player = new Player(name, 0, mode);
 	field = new Screen(504, 600);
 	input = new InputHandler();
-
 	var picture = new Image();
 
 	picture.onload = function () {
@@ -23,10 +23,13 @@ var main = function () {
 	};
 
 	picture.src = "pics/sprites.png";
-};
 
-//soundtrack
-soundtrack.play();
+	//remove the menu
+	document.body.removeChild(document.querySelector("div"));
+	//soundtrack
+	menuSoundtrack.pause();
+	gameSoundtrack.play();
+};
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
@@ -34,7 +37,7 @@ var init = function () {
 	bullets = [];
 	direction = 1;
 	spFrame = 0;
-	lvFrame = 30;
+	lvFrame = 30 - player.modality * 10; //increases the speed depending on the user option
 	frames = 0;
 	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
 	cities = {

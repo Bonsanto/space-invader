@@ -40,7 +40,7 @@ var Tank = function (sprite, x, y, speed) {
 		this.life -= damageBullet;
 		tankhit.cloneNode(true).play();
 
-		if(this.life === 0) alert("You LOST");
+		if (this.life === 0) alert("You LOST");
 	};
 };
 
@@ -59,7 +59,7 @@ var Screen = function (w, h) {
 
 	this.drawBullet = function (bullet) {
 		this.ctx.fillStyle = bullet.color;
-		 this.ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+		this.ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
 	};
 
 	this.clear = function () {
@@ -127,4 +127,15 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 	};
 
 	shoot(this.type);
+};
+
+//Player class.
+var Player = function (n, s, m) {
+	this.name = n;
+	this.score = 0 || s;
+	this.modality = m;
+
+	this.updateScore = function (number) {
+		this.score += (0 || number);
+	};
 };
