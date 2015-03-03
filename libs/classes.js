@@ -14,12 +14,13 @@ var alienBulletCollision = function (alien, bullet) {
 
 
 // Alien class.
-var Alien = function (sprite, x, y, w, h) {
+var Alien = function (sprite, x, y, w, h, s) {
 	this.sprite = sprite;
 	this.x = x;
 	this.y = y;
 	this.w = w;
 	this.h = h;
+	this.score = s;
 
 	this.hitted = function () {
 		alienhit.cloneNode(true).play();

@@ -1,11 +1,10 @@
-//todo: add the game mode.
 var player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
 
 var main = function (name, mode) {
 	player = new Player(name, 0, mode);
-	field = new Screen(504, 600);
+	field = new Screen(504, 800);
 	input = new InputHandler();
 	var picture = new Image();
 
@@ -28,7 +27,7 @@ var main = function (name, mode) {
 	document.body.removeChild(document.querySelector("div"));
 	//soundtrack
 	menuSoundtrack.pause();
-	gameSoundtrack.play();
+	//gameSoundtrack.play();
 };
 
 var init = function () {
@@ -71,7 +70,7 @@ var init = function () {
 		hits: function (x, y) {
 			y -= this.y;
 			var data = this.ctx.getImageData(x, y, 1, 1);
-			if (data["data"][3] !== 0) {
+			if (data["data"][3] !== 0) { //3 means opacity
 				this.generateDamage(x, y);
 				return true;
 			}
@@ -84,8 +83,8 @@ var init = function () {
 	rows.forEach(function (element, index) {
 		for (var i = 0; i < 10; i++) {
 			aliens.push(new Alien(alienSprite[element],
-				30 + i * 30 + [0, 4, 0][element], 30 + index * 30, //[0,4,0] for adding a gap between the aliens
-				alienSprite[element][0].w, alienSprite[element][0].h));
+				30 + i * 30 + [0, 4, 0][element], 130 + index * 30, //[0,4,0] for adding a gap between the aliens
+				alienSprite[element][0].w, alienSprite[element][0].h, 50 - element * 10));
 		}
 	});
 };
@@ -136,6 +135,7 @@ var update = function () {
 		aliens.forEach(function (alien, alienIndex) {
 			//if the alien is shot
 			if (alienBulletCollision(bullet, alien) && bullet.type === 1) {
+				player.updateScore(alien.score);
 				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
@@ -203,7 +203,7 @@ var update = function () {
 var render = function () {
 	field.clear();
 
-	aliens.forEach(function (element, index) {
+	aliens.forEach(function (element) {
 		//spFrame makes the sprite to change.
 		field.drawSprite(element.sprite[spFrame], element.x, element.y);
 	});
