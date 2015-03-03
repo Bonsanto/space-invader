@@ -28,7 +28,7 @@
 	var name = "";
 
 	//plays the music of the menu
-	//	menuSoundtrack.play();
+	menuSoundtrack.play();
 
 	var modality = function (element) {
 		var buttons = document.querySelectorAll('button');
@@ -37,8 +37,8 @@
 		element.style.backgroundColor = "dimgray";
 
 		if (content === "Easy") {
-			mode = 0;
 			buttons[1].style.backgroundColor = buttons[2].style.backgroundColor = "black";
+			mode = 0;
 		} else if (content === "Medium") {
 			buttons[0].style.backgroundColor = buttons[2].style.backgroundColor = "black";
 			mode = 1;
