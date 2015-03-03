@@ -32,21 +32,19 @@
 
 	var modality = function (element) {
 		var buttons = document.querySelectorAll('button');
+		var content = element.innerHTML;
+
 		element.style.backgroundColor = "dimgray";
 
-		switch (element.innerText) {
-			case "Easy":
-				mode = 0;
-				buttons[1].style.backgroundColor = buttons[2].style.backgroundColor = "black";
-				break;
-			case "Medium":
-				buttons[0].style.backgroundColor = buttons[2].style.backgroundColor = "black";
-				mode = 1;
-				break;
-			case "Hard":
-				buttons[1].style.backgroundColor = buttons[0].style.backgroundColor = "black";
-				mode = 2;
-				break;
+		if (content === "Easy") {
+			buttons[1].style.backgroundColor = buttons[2].style.backgroundColor = "black";
+			mode = 0;
+		} else if (content === "Medium") {
+			buttons[0].style.backgroundColor = buttons[2].style.backgroundColor = "black";
+			mode = 1;
+		} else {
+			buttons[1].style.backgroundColor = buttons[0].style.backgroundColor = "black";
+			mode = 2;
 		}
 	};
 
