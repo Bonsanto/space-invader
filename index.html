@@ -10,22 +10,50 @@
 </head>
 <body>
 <div>
-	<label for="user">Enter your name</label>
-	<br/>
-	<input type="text" value="your name" id="user" onclick="this.value = '';"/>
-	<br/>
+	<br/><br/><br/>
+	<label for="user">Enter your name</label><br/>
+	<input type="text" value="your name" id="user" onclick="this.value = '';"/><br/><br/><br/><br/>
 
 	<p>Difficulty</p>
-	<button>Easy</button>
+	<button onclick="modality(this)" style="background-color: dimgray">Easy</button>
 	<br/>
-	<button>Medium</button>
+	<button onclick="modality(this)">Medium</button>
 	<br/>
-	<button>Hard</button>
-	<br/>
-	<button onclick="main()">PLAY!</button>
+	<button onclick="modality(this)">Hard</button>
+	<br/><br/><br/><br/><br/><br/>
+	<button class="play" onclick="startGame()">PLAY!</button>
 </div>
 <script>
+	var mode = 0;
+	var name = "";
+
+	//plays the music of the menu
 	menuSoundtrack.play();
+
+	var modality = function (element) {
+		var buttons = document.querySelectorAll('button');
+		element.style.backgroundColor = "dimgray";
+
+		switch (element.innerText) {
+			case "Easy":
+				mode = 0;
+				buttons[1].style.backgroundColor = buttons[2].style.backgroundColor = "black";
+				break;
+			case "Medium":
+				buttons[0].style.backgroundColor = buttons[2].style.backgroundColor = "black";
+				mode = 1;
+				break;
+			case "Hard":
+				buttons[1].style.backgroundColor = buttons[0].style.backgroundColor = "black";
+				mode = 2;
+				break;
+		}
+	};
+
+	var startGame = function () {
+		name = document.querySelector('input').value;
+		main(name, mode);
+	};
 </script>
 </body>
 </html>

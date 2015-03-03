@@ -43,18 +43,6 @@ input {
 	text-align: center;
 }
 
-div div {
-	font-family: "hobo", Arial, "Times New Roman", serif;
-	color: aliceblue;
-	background-color: black;
-	display: block;
-	position: absolute;
-	margin: auto;
-	width: 100px;
-	height: 90px;
-
-}
-
 div p {
 	font-size: x-large;
 }
@@ -72,6 +60,16 @@ div button {
 div button:hover {
 	color: aliceblue;
 	background-color: dimgray;
+}
+
+.play {
+	font-family: "hobo", Arial, "Times New Roman", serif;
+	font-size: xx-large;
+	color: aliceblue;
+	background-color: black;
+	display: block;
+	margin: auto;
+	vertical-align: middle;
 }
 
 canvas {
