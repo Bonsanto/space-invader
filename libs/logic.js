@@ -240,6 +240,7 @@ var render = function () {
 		field.drawBullet(bullet);
 	});
 
+	field.ctx.fillStyle = "aliceblue";
 	field.ctx.font = "bold 10px hobo";
 	field.ctx.fillText("Press p to pause", 400, 670);
 
