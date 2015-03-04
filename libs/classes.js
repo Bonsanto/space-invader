@@ -40,8 +40,10 @@ var Tank = function (sprite, x, y, speed) {
 	this.life = 50;
 
 	this.hitted = function (damageBullet) {
+		var sound = tankhit.cloneNode(true);
+		sound.volume = tankhit.volume;
+		sound.play();
 		this.life -= damageBullet;
-		tankhit.cloneNode(true).play();
 
 		if (this.life === 0) alert("You LOST");
 	};

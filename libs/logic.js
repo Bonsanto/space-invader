@@ -37,7 +37,7 @@ var init = function () {
 	lvFrame = 30 - player.modality * 10; //increases the speed depending on the user option
 	frames = 0;
 	heart = new Image();
-	heart.src="pics/heart.png";
+	heart.src = "pics/heart.png";
 	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
 	cities = {
 		canvas: {},
@@ -68,6 +68,9 @@ var init = function () {
 			this.ctx.clearRect(x - 2, y - 6, 2, 2);
 		},
 		hits: function (x, y) {
+			var sound = cityhit.cloneNode(true);
+			sound.volume = cityhit.volume;
+			sound.play();
 			y -= this.y;
 			var data = this.ctx.getImageData(x, y, 1, 1);
 			if (data["data"][3] !== 0) { //3 means opacity
@@ -145,7 +148,6 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
-				cityhit.cloneNode(true).play();
 			}
 		}
 
@@ -239,7 +241,7 @@ var render = function () {
 	});
 
 	field.ctx.font = "bold 10px hobo";
-	field.ctx.fillText("Press p to pause", 400,670);
+	field.ctx.fillText("Press p to pause", 400, 670);
 
 	//Show life on cavnas
 	field.ctx.font = "bold 30px hobo";
@@ -247,7 +249,7 @@ var render = function () {
 
 	//Show score on canvas
 	field.ctx.font = "bold 30px hobo";
-	field.ctx.fillText("Score: " +player.score, 300, 50);
+	field.ctx.fillText("Score: " + player.score, 300, 50);
 
 	field.ctx.restore();
 	field.ctx.drawImage(heart, 20, 30, 25, 25);

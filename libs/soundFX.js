@@ -26,4 +26,4 @@ tankshot.volume = 0.5;
 
 var tankhit = new Audio();
 tankhit.src = "libs/soundEffects/tankhit1.mp3";
-tankhit.volume = 1;
+tankhit.volume = 0.5;
