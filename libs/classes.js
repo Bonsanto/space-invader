@@ -24,7 +24,7 @@ var Alien = function (sprite, x, y, w, h, s) {
 
 	this.hitted = function () {
 		var sound = alienhit.cloneNode(true);
-		sound.volume = volumeSFX;
+		sound.volume = alienhit.volume;
 		sound.play();
 	};
 };
@@ -122,7 +122,7 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 		// 0 is an alien 1 is a tank
 		var sound = (type === 0) ?
 			alienshot.cloneNode(true) : tankshot.cloneNode(true);
-		sound.volume = volumeSFX;
+		sound.volume = alienshot.volume;
 		sound.play();
 	};
 

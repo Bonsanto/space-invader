@@ -66,10 +66,9 @@
 	var updateVolume = function (slider) {
 		var volume = parseInt(slider.value) / 100;
 		if (slider.id === "music") {
-			gameSoundtrack.volume =
-					menuSoundtrack.volume = volume;
+			gameSoundtrack.volume = menuSoundtrack.volume = volume;
 		} else {
-			volumeSFX = volume;
+			tankshot.volume = alienhit.volume = alienshot.volume = cityhit.volume = volume;
 		}
 	};
 </script>
