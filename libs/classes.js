@@ -23,7 +23,9 @@ var Alien = function (sprite, x, y, w, h, s) {
 	this.score = s;
 
 	this.hitted = function () {
-		alienhit.cloneNode(true).play();
+		var sound = alienhit.cloneNode(true);
+		sound.volume = volumeSFX;
+		sound.play();
 	};
 };
 
@@ -118,8 +120,10 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 
 	var shoot = function (type) {
 		// 0 is an alien 1 is a tank
-		type === 0 ?
-			alienshot.cloneNode(true).play() : tankshot.cloneNode(true).play();
+		var sound = (type === 0) ?
+			alienshot.cloneNode(true) : tankshot.cloneNode(true);
+		sound.volume = volumeSFX;
+		sound.play();
 	};
 
 	this.update = function () {

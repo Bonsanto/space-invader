@@ -1,4 +1,4 @@
-var paused, player, input, field, frames, spFrame, lvFrame,
+var volumeSFX, paused, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
 
@@ -30,6 +30,7 @@ var main = function (name, mode) {
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
+	volumeSFX = 0.5;
 	aliens = [];
 	bullets = [];
 	direction = 1;
@@ -144,7 +145,9 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
-				cityhit.cloneNode(true).play();
+				var ch = cityhit.cloneNode(true);
+				ch.volume = volumeSFX;
+				ch.play();
 			}
 		}
 
