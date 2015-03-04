@@ -250,7 +250,7 @@ var render = function () {
 
 	//Show score on canvas
 	field.ctx.font = "bold 30px hobo";
-	field.ctx.fillText("Score: " + player.score, 300, 50);
+	field.ctx.fillText("Score: " + player.score, 320, 50);
 
 	field.ctx.restore();
 	field.ctx.drawImage(heart, 20, 30, 25, 25);
