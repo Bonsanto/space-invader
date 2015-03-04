@@ -238,6 +238,9 @@ var render = function () {
 		field.drawBullet(bullet);
 	});
 
+	field.ctx.font = "bold 10px hobo";
+	field.ctx.fillText("Press p to pause", 400,670);
+
 	//Show life on cavnas
 	field.ctx.font = "bold 30px hobo";
 	field.ctx.fillText("Life: " + tank.life, 50, 50);
