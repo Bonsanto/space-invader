@@ -1,6 +1,6 @@
 var volumeSFX, paused, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
-	aliens, direction, tank, bullets, cities;
+	aliens, direction, tank, bullets, cities, heart;
 
 var main = function (name, mode) {
 	player = new Player(name, 0, mode);
@@ -37,6 +37,8 @@ var init = function () {
 	spFrame = 0;
 	lvFrame = 30 - player.modality * 10; //increases the speed depending on the user option
 	frames = 0;
+	heart = new Image();
+	heart.src="pics/heart.png";
 	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
 	cities = {
 		canvas: {},
@@ -240,7 +242,16 @@ var render = function () {
 		field.drawBullet(bullet);
 	});
 
+	//Show life on cavnas
+	field.ctx.font = "bold 30px hobo";
+	field.ctx.fillText("Life: " + tank.life, 50, 50);
+
+	//Show score on canvas
+	field.ctx.font = "bold 30px hobo";
+	field.ctx.fillText("Score: " +player.score, 300, 50);
+
 	field.ctx.restore();
+	field.ctx.drawImage(heart, 20, 30, 25, 25);
 	field.ctx.drawImage(cities.canvas, 0, cities.y);
-	field.drawSprite(tankSprite, tank.x, tank.y)
+	field.drawSprite(tankSprite, tank.x, tank.y);
 };
