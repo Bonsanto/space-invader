@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
 	<meta charset="UTF-8">
 	<title>Simple Space Invaders</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-	<br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/>
 	<label for="user">Enter your name</label><br/>
 	<input type="text" value="your name" id="user" onclick="this.value = '';"/><br/><br/><br/><br/>
 
@@ -22,6 +22,15 @@
 	<button onclick="modality(this)">Hard</button>
 	<br/><br/><br/><br/><br/><br/>
 	<button class="play" onclick="startGame()">PLAY!</button>
+</div>
+<div style="visibility: hidden; width: 300px; height: 300px">
+	<br/>
+
+	<p>Press 'p' to resume</p><br/><br/>
+	<label for="sfx">SFX Volume</label><br/>
+	<input type="range" id="sfx" value="50" onchange="updateVolume(this)"/><br/><br/><br/>
+	<label for="music">Music Volume</label><br/>
+	<input type="range" id="music" value="50" onchange="updateVolume(this)"/>
 </div>
 <script>
 	var mode = 0;
@@ -50,7 +59,17 @@
 
 	var startGame = function () {
 		name = document.querySelector('input').value;
+		document.querySelector("div").style.visibility = "hidden";
 		main(name, mode);
+	};
+
+	var updateVolume = function (slider) {
+		var volume = parseInt(slider.value) / 100;
+		if (slider.id === "music") {
+			gameSoundtrack.volume = menuSoundtrack.volume = volume;
+		} else {
+			tankhit.volume = tankshot.volume = alienhit.volume = alienshot.volume = cityhit.volume = volume;
+		}
 	};
 </script>
 </body>

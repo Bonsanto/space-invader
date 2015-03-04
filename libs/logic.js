@@ -1,11 +1,10 @@
-//todo: add the game mode.
-var player, input, field, frames, spFrame, lvFrame,
+var paused, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
-	aliens, direction, tank, bullets, cities;
+	aliens, direction, tank, bullets, cities, heart;
 
 var main = function (name, mode) {
 	player = new Player(name, 0, mode);
-	field = new Screen(504, 600);
+	field = new Screen(504, 700);
 	input = new InputHandler();
 	var picture = new Image();
 
@@ -24,8 +23,6 @@ var main = function (name, mode) {
 
 	picture.src = "pics/sprites.png";
 
-	//remove the menu
-	document.body.removeChild(document.querySelector("div"));
 	//soundtrack
 	menuSoundtrack.pause();
 	gameSoundtrack.play();
@@ -39,6 +36,8 @@ var init = function () {
 	spFrame = 0;
 	lvFrame = 30 - player.modality * 10; //increases the speed depending on the user option
 	frames = 0;
+	heart = new Image();
+	heart.src = "pics/heart.png";
 	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
 	cities = {
 		canvas: {},
@@ -69,9 +68,12 @@ var init = function () {
 			this.ctx.clearRect(x - 2, y - 6, 2, 2);
 		},
 		hits: function (x, y) {
+			var sound = cityhit.cloneNode(true);
+			sound.volume = cityhit.volume;
+			sound.play();
 			y -= this.y;
 			var data = this.ctx.getImageData(x, y, 1, 1);
-			if (data["data"][3] !== 0) {
+			if (data["data"][3] !== 0) { //3 means opacity
 				this.generateDamage(x, y);
 				return true;
 			}
@@ -84,8 +86,8 @@ var init = function () {
 	rows.forEach(function (element, index) {
 		for (var i = 0; i < 10; i++) {
 			aliens.push(new Alien(alienSprite[element],
-				30 + i * 30 + [0, 4, 0][element], 30 + index * 30, //[0,4,0] for adding a gap between the aliens
-				alienSprite[element][0].w, alienSprite[element][0].h));
+				30 + i * 30 + [0, 4, 0][element], 100 + index * 30, //[0,4,0] for adding a gap between the aliens
+				alienSprite[element][0].w, alienSprite[element][0].h, 50 - element * 10));
 		}
 	});
 };
@@ -95,17 +97,41 @@ var run = function () {
 		update();
 		render();
 
-		window.requestAnimationFrame(loop, field.canvas);
+		if (!paused)
+			window.requestAnimationFrame(loop, field.canvas);
+		else {
+			var listener = setInterval(function () {
+				if (input.isPressed(80)) {
+					resume();
+					clearInterval(listener);
+					window.requestAnimationFrame(loop, field.canvas);
+				}
+			}, 20)
+		}
 	};
 	window.requestAnimationFrame(loop, field.canvas);
 };
 
+var pause = function () {
+	document.querySelectorAll("div")[1].style.visibility = "visible";
+	document.querySelector("canvas").style.visibility = "hidden";
+	gameSoundtrack.pause();
+	paused = true;
+};
+
+var resume = function () {
+	document.querySelectorAll("div")[1].style.visibility = "hidden";
+	document.querySelector("canvas").style.visibility = "visible";
+	gameSoundtrack.play();
+	paused = false;
+};
+
 var update = function () {
+	if (input.isPressed(80)) pause();
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
 	if (input.isPressed(32)) {
-		tankshot.cloneNode(true).play(); //the cloneNode(true) makes the sound to reload fast
 		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 1));
 	}
 	//limitations for the tank position
@@ -122,7 +148,6 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
-				cityhit.cloneNode(true).play();
 			}
 		}
 
@@ -136,6 +161,7 @@ var update = function () {
 		aliens.forEach(function (alien, alienIndex) {
 			//if the alien is shot
 			if (alienBulletCollision(bullet, alien) && bullet.type === 1) {
+				player.updateScore(alien.score);
 				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
@@ -203,7 +229,7 @@ var update = function () {
 var render = function () {
 	field.clear();
 
-	aliens.forEach(function (element, index) {
+	aliens.forEach(function (element) {
 		//spFrame makes the sprite to change.
 		field.drawSprite(element.sprite[spFrame], element.x, element.y);
 	});
@@ -214,7 +240,20 @@ var render = function () {
 		field.drawBullet(bullet);
 	});
 
+	field.ctx.fillStyle = "aliceblue";
+	field.ctx.font = "bold 10px hobo";
+	field.ctx.fillText("Press p to pause", 400, 670);
+
+	//Show life on cavnas
+	field.ctx.font = "bold 30px hobo";
+	field.ctx.fillText("Life: " + tank.life, 50, 50);
+
+	//Show score on canvas
+	field.ctx.font = "bold 30px hobo";
+	field.ctx.fillText("Score: " + player.score, 320, 50);
+
 	field.ctx.restore();
+	field.ctx.drawImage(heart, 20, 30, 25, 25);
 	field.ctx.drawImage(cities.canvas, 0, cities.y);
-	field.drawSprite(tankSprite, tank.x, tank.y)
+	field.drawSprite(tankSprite, tank.x, tank.y);
 };

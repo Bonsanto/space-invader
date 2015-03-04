@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "hobo";
-	src: url("../fonts/hobo.ttf");
+	src: url("../fonts/hobo.ttf") format('truetype'), url("../fonts/hobo.eot") format('embedded-opentype');
 }
 
 body {
@@ -20,7 +20,7 @@ div {
 	left: 0;
 	right: 0;
 	width: 504px;
-	height: 600px;
+	height: 700px;
 }
 
 label {
@@ -43,11 +43,41 @@ input {
 	text-align: center;
 }
 
+input[type=range] {
+	-webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	width: 450px;
+	height: 5px;
+	background: #ddd;
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: black;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+	background: dimgray;
+	margin-top: -5px;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #ccc;
+}
+
 div p {
 	font-size: x-large;
 }
 
-div button {
+button {
 	font-family: "hobo", Arial, "Times New Roman", serif;
 	font-size: x-large;
 	color: aliceblue;

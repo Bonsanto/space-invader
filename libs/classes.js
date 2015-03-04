@@ -14,15 +14,18 @@ var alienBulletCollision = function (alien, bullet) {
 
 
 // Alien class.
-var Alien = function (sprite, x, y, w, h) {
+var Alien = function (sprite, x, y, w, h, s) {
 	this.sprite = sprite;
 	this.x = x;
 	this.y = y;
 	this.w = w;
 	this.h = h;
+	this.score = s;
 
 	this.hitted = function () {
-		alienhit.cloneNode(true).play();
+		var sound = alienhit.cloneNode(true);
+		sound.volume = alienhit.volume;
+		sound.play();
 	};
 };
 
@@ -37,8 +40,10 @@ var Tank = function (sprite, x, y, speed) {
 	this.life = 50;
 
 	this.hitted = function (damageBullet) {
+		var sound = tankhit.cloneNode(true);
+		sound.volume = tankhit.volume;
+		sound.play();
 		this.life -= damageBullet;
-		tankhit.cloneNode(true).play();
 
 		if (this.life === 0) alert("You LOST");
 	};
@@ -117,8 +122,10 @@ var Bullet = function (x, y, xSpeed, ySpeed, w, h, color, type) {
 
 	var shoot = function (type) {
 		// 0 is an alien 1 is a tank
-		type === 0 ?
-			alienshot.cloneNode(true).play() : tankshot.cloneNode(true).play();
+		var sound = (type === 0) ?
+			alienshot.cloneNode(true) : tankshot.cloneNode(true);
+		sound.volume = alienshot.volume;
+		sound.play();
 	};
 
 	this.update = function () {
