@@ -1,4 +1,4 @@
-var volumeSFX, paused, player, input, field, frames, spFrame, lvFrame,
+var paused, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities;
 
@@ -30,7 +30,6 @@ var main = function (name, mode) {
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
-	volumeSFX = 0.5;
 	aliens = [];
 	bullets = [];
 	direction = 1;
@@ -128,7 +127,6 @@ var update = function () {
 	if (input.isDown(39) || input.isDown(68)) tank.x += tank.speed; // right
 	//todo: solve small problem with the difference between the middle and real bullet position.
 	if (input.isPressed(32)) {
-		tankshot.cloneNode(true).play(); //the cloneNode(true) makes the sound to reload fast
 		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 1));
 	}
 	//limitations for the tank position
@@ -145,9 +143,7 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
-				var ch = cityhit.cloneNode(true);
-				ch.volume = volumeSFX;
-				ch.play();
+				cityhit.cloneNode(true).play();
 			}
 		}
 
