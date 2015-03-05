@@ -146,7 +146,7 @@ var update = function () {
 		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 1));
 	}
 	//limitations for the tank position
-	bullets.forEach(function (bullet, bulletIndex) {
+		bullets.forEach(function (bullet, bulletIndex) {
 		bullet.update();
 
 		//If the bullet is outside of the map
@@ -167,6 +167,11 @@ var update = function () {
 			bullets.splice(bulletIndex, 1);
 			tank.hitted(1);
 		}
+
+		//If the aliens touch the bottom
+		aliens.forEach(function(alien){
+			if (alien.y + 30 >= field.h) showGameOver();
+		});
 
 		//Here is where the game speed is increased.
 		aliens.forEach(function (alien, alienIndex) {

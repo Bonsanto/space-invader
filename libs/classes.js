@@ -37,7 +37,7 @@ var Tank = function (sprite, x, y, speed) {
 	this.w = this.sprite.w;
 	this.h = this.sprite.h;
 	this.speed = speed;
-	this.life = 1;
+	this.life = 7;
 
 	this.hitted = function (damageBullet) {
 		var sound = tankhit.cloneNode(true);
