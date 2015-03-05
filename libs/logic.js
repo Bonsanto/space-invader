@@ -30,6 +30,8 @@ var main = function (name, mode) {
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
+	stoped = false;
+	paused = false;
 	aliens = [];
 	bullets = [];
 	direction = 1;
@@ -106,7 +108,7 @@ var run = function () {
 					clearInterval(listener);
 					window.requestAnimationFrame(loop, field.canvas);
 				}
-			}, 20)
+			}, 20);
 		}
 	};
 	window.requestAnimationFrame(loop, field.canvas);
