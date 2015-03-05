@@ -61,7 +61,9 @@
 	var mode = 0;
 	var name = "";
 
-	if (localStorage.getItem("name") !== "") document.querySelector("input").value = localStorage.getItem("name");
+	if (localStorage.getItem("name") !== "" &&
+			localStorage.getItem("name") !== null)
+		document.querySelector("input").value = localStorage.getItem("name");
 
 	//plays the music of the menu
 	menuSoundtrack.play();
