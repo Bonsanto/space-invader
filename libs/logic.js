@@ -170,7 +170,7 @@ var update = function () {
 
 		//If the aliens touch the bottom
 		aliens.forEach(function(alien){
-			if (alien.y + alien.w >= screen.h) showGameOver();
+			if (alien.y + 30 >= field.h) showGameOver();
 		});
 
 		//Here is where the game speed is increased.
