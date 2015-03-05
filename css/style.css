@@ -27,6 +27,7 @@ div {
 	right: 0;
 	width: 504px;
 	height: 700px;
+	border: 2px solid;
 }
 
 label {
