@@ -37,9 +37,12 @@
 <div style="visibility: hidden; width: 400px; height: 300px">
 
 	<p id="lostMessage"></p>
+
 	<p id="scoreMessage"></p><br/><br/>
+
 	<p>Restart</p><br/><br/>
-	<button class="yesButton">Yes</button><button class="noButton">Hell no</button>
+	<button class="yesButton" onclick="restartGame();">Yes</button>
+	<button class="noButton">Hell no</button>
 </div>
 
 <script>
@@ -80,6 +83,17 @@
 		} else {
 			tankhit.volume = tankshot.volume = alienhit.volume = alienshot.volume = cityhit.volume = volume;
 		}
+	};
+
+	var restartGame = function () {
+		document.body.removeChild(document.querySelector("canvas"));
+		document.querySelectorAll("div")[2].style.visibility = "hidden";
+		stoped = false;
+		main(name, mode);
+	};
+
+	var restartApplication = function () {
+		;
 	};
 </script>
 </body>
