@@ -4,7 +4,7 @@ menuSoundtrack.loop = true;
 menuSoundtrack.volume = 0.2;
 
 var gameSoundtrack = new Audio();
-gameSoundtrack.src = "libs/soundEffects/soundtrack1.mp3";
+gameSoundtrack.src = "libs/soundEffects/soundtrack2.mp3";
 gameSoundtrack.loop = true;
 gameSoundtrack.volume = 0.2;
 

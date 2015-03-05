@@ -37,7 +37,7 @@ var Tank = function (sprite, x, y, speed) {
 	this.w = this.sprite.w;
 	this.h = this.sprite.h;
 	this.speed = speed;
-	this.life = 50;
+	this.life = 1;
 
 	this.hitted = function (damageBullet) {
 		var sound = tankhit.cloneNode(true);
@@ -45,7 +45,7 @@ var Tank = function (sprite, x, y, speed) {
 		sound.play();
 		this.life -= damageBullet;
 
-		if (this.life === 0) alert("You LOST");
+		if (this.life === 0) showGameOver();
 	};
 };
 

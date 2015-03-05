@@ -1,4 +1,4 @@
-var paused, player, input, field, frames, spFrame, lvFrame,
+var paused, stoped, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities, heart;
 
@@ -30,6 +30,8 @@ var main = function (name, mode) {
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
+	stoped = false;
+	paused = false;
 	aliens = [];
 	bullets = [];
 	direction = 1;
@@ -97,16 +99,16 @@ var run = function () {
 		update();
 		render();
 
-		if (!paused)
+		if (!paused && !stoped)
 			window.requestAnimationFrame(loop, field.canvas);
-		else {
+		else if (paused) {
 			var listener = setInterval(function () {
 				if (input.isPressed(80)) {
 					resume();
 					clearInterval(listener);
 					window.requestAnimationFrame(loop, field.canvas);
 				}
-			}, 20)
+			}, 20);
 		}
 	};
 	window.requestAnimationFrame(loop, field.canvas);
@@ -124,6 +126,15 @@ var resume = function () {
 	document.querySelector("canvas").style.visibility = "visible";
 	gameSoundtrack.play();
 	paused = false;
+};
+
+var showGameOver = function () {
+	document.querySelectorAll("div")[2].style.visibility = "visible";
+	document.querySelectorAll("div")[2].style.zIndex = "999";
+	document.querySelector("#lostMessage").innerText = player.name + ", You have lost";
+	document.querySelector("#scoreMessage").innerText = "Your score was: " + player.score;
+	gameSoundtrack.pause();
+	stoped = true;
 };
 
 var update = function () {

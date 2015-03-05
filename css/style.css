@@ -5,6 +5,12 @@
 
 body {
 	background-image: url('../pics/stars.bmp');
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
 }
 
 div {
@@ -111,4 +117,15 @@ canvas {
 	bottom: 0;
 	left: 0;
 	right: 0;
+}
+
+.yesButton{
+	display: inline-block;
+	position: relative;
+}
+
+.noButton{
+	display: inline-block;
+	position: relative;
+	margin-left: 40px;
 }

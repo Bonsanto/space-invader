@@ -32,6 +32,18 @@
 	<label for="music">Music Volume</label><br/>
 	<input type="range" id="music" value="50" onchange="updateVolume(this)"/>
 </div>
+
+<!Game over div>
+<div style="visibility: hidden; width: 400px; height: 300px">
+	<p id="lostMessage"></p>
+
+	<p id="scoreMessage"></p><br/><br/>
+
+	<p>Do You want to restart?</p><br/><br/>
+	<button class="yesButton" onclick="restartGame();">Yes</button>
+	<button class="noButton" onclick="restartApplication();">Hell no</button>
+</div>
+
 <script>
 	var mode = 0;
 	var name = "";
@@ -70,6 +82,19 @@
 		} else {
 			tankhit.volume = tankshot.volume = alienhit.volume = alienshot.volume = cityhit.volume = volume;
 		}
+	};
+
+	var restartGame = function () {
+		document.body.removeChild(document.querySelector("canvas"));
+		document.querySelectorAll("div")[2].style.visibility = "hidden";
+		main(name, mode);
+	};
+
+	var restartApplication = function () {
+		menuSoundtrack.play();
+		document.body.removeChild(document.querySelector("canvas"));
+		document.querySelectorAll("div")[2].style.visibility = "hidden";
+		document.querySelectorAll("div")[0].style.visibility = "visible";
 	};
 </script>
 </body>
