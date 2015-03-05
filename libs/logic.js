@@ -137,6 +137,15 @@ var showGameOver = function () {
 	stoped = true;
 };
 
+var showWinGame = function () {
+	document.querySelectorAll("div")[3].style.visibility = "visible";
+	document.querySelectorAll("div")[3].style.zIndex = "999";
+	document.querySelector("#winMessage").innerText = player.name + ", You have WIN";
+	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
+	gameSoundtrack.pause();
+	stoped = true;
+};
+
 var update = function () {
 	if (input.isPressed(80)) pause();
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left
@@ -176,6 +185,7 @@ var update = function () {
 				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
+				if (aliens.length === 0) showWinGame();
 
 				switch (aliens.length) {
 					case 30:
