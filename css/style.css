@@ -112,3 +112,13 @@ canvas {
 	left: 0;
 	right: 0;
 }
+
+.bttYES{
+	display: inline-block;
+	position: relative;
+}
+.bttNO{
+	display: inline-block;
+	position: relative;
+	margin-left: 40px;
+}

@@ -126,6 +126,13 @@ var resume = function () {
 	paused = false;
 };
 
+var showGameOver = function () {
+	document.querySelectorAll("div")[2].style.visibility = "visible";
+	document.querySelectorAll("div")[2].style.zIndex = "999";
+	document.querySelector("#lostMessage").innerText = player.name + ", You have lost";
+	document.querySelector("#scoreMessage").innerText = "Your score was: " + player.score;
+};
+
 var update = function () {
 	if (input.isPressed(80)) pause();
 	if (input.isDown(37) || input.isDown(65)) tank.x -= tank.speed; // left

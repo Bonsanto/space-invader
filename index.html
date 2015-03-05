@@ -30,8 +30,18 @@
 	<label for="sfx">SFX Volume</label><br/>
 	<input type="range" id="sfx" value="50" onchange="updateVolume(this)"/><br/><br/><br/>
 	<label for="music">Music Volume</label><br/>
-	<input type="range" id="music" value="50" onchange="updateVolume(this)"/>
+	<input type="range" id="music" pvalue="50" onchange="updateVolume(this)"/>
 </div>
+
+<!Game over div>
+<div name="gameOver" style="visibility: hidden; width: 400px; height: 300px">
+
+	<p id="lostMessage"></p>
+	<p id="scoreMessage"></p><br/><br/>
+	<p>Restart</p><br/><br/>
+	<button class="bttYES">Yes</button><!TODO Horizontal aligment><button class="bttNO">Hell no</button>
+</div>
+
 <script>
 	var mode = 0;
 	var name = "";
