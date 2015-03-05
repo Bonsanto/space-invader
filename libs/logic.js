@@ -133,6 +133,17 @@ var showGameOver = function () {
 	document.querySelectorAll("div")[2].style.zIndex = "999";
 	document.querySelector("#lostMessage").innerText = player.name + ", You have lost";
 	document.querySelector("#scoreMessage").innerText = "Your score was: " + player.score;
+	defeatSound.play();
+	gameSoundtrack.pause();
+	stoped = true;
+};
+
+var showWinGame = function () {
+	document.querySelectorAll("div")[3].style.visibility = "visible";
+	document.querySelectorAll("div")[3].style.zIndex = "999";
+	document.querySelector("#winMessage").innerText = player.name + ", You have WON";
+	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
+	victorySound.play();
 	gameSoundtrack.pause();
 	stoped = true;
 };
@@ -181,6 +192,7 @@ var update = function () {
 				alien.hitted();
 				aliens.splice(alienIndex, 1);
 				bullets.splice(bulletIndex, 1);
+				if (aliens.length === 0) showWinGame();
 
 				switch (aliens.length) {
 					case 30:

@@ -27,3 +27,13 @@ tankshot.volume = 0.2;
 var tankhit = new Audio();
 tankhit.src = "libs/soundEffects/tankhit1.mp3";
 tankhit.volume = 0.2;
+
+var victorySound = new Audio();
+victorySound.src = "libs/soundEffects/victorySound.mp3";
+victorySound.volume = 0.2;
+victorySound.loop = true;
+
+var defeatSound = new Audio();
+defeatSound.src = "libs/soundEffects/defeatSound.mp3";
+defeatSound.volume = 0.2;
+defeatSound.loop = true;
