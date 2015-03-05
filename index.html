@@ -12,7 +12,8 @@
 <div>
 	<br/><br/><br/><br/><br/><br/>
 	<label for="user">Enter your name</label><br/>
-	<input type="text" value="your name" id="user" onclick="this.value = '';"/><br/><br/><br/><br/>
+	<input type="text" value="your name" id="user"
+		   onclick="this.value = '';" onchange="localStorage.setItem('name', this.value);"/><br/><br/><br/><br/>
 
 	<p>Difficulty</p>
 	<button onclick="modality(this)" style="background-color: dimgray">Easy</button>
@@ -59,6 +60,8 @@
 <script>
 	var mode = 0;
 	var name = "";
+
+	if (localStorage.getItem("name") !== "") document.querySelector("input").value = localStorage.getItem("name");
 
 	//plays the music of the menu
 	menuSoundtrack.play();
