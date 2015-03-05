@@ -133,16 +133,18 @@ var showGameOver = function () {
 	document.querySelectorAll("div")[2].style.zIndex = "999";
 	document.querySelector("#lostMessage").innerText = player.name + ", You have lost";
 	document.querySelector("#scoreMessage").innerText = "Your score was: " + player.score;
+	defeatSound.play();
 	gameSoundtrack.pause();
 	stoped = true;
 };
 
 var showWinGame = function () {
+	gameSoundtrack.pause();
+	victorySound.play();
 	document.querySelectorAll("div")[3].style.visibility = "visible";
 	document.querySelectorAll("div")[3].style.zIndex = "999";
 	document.querySelector("#winMessage").innerText = player.name + ", You have WON";
 	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
-	gameSoundtrack.pause();
 	stoped = true;
 };
 

@@ -97,6 +97,8 @@
 	};
 
 	var restartGame = function (source) {
+		victorySound.pause();
+		defeatSound.pause();
 		document.body.removeChild(document.querySelector("canvas"));
 		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
 				: document.querySelectorAll("div")[3].style.visibility = "hidden";
@@ -104,6 +106,8 @@
 	};
 
 	var restartApplication = function (source) {
+		victorySound.pause();
+		defeatSound.pause();
 		menuSoundtrack.play();
 		document.body.removeChild(document.querySelector("canvas"));
 		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
