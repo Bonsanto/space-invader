@@ -40,8 +40,8 @@
 	<p id="scoreMessage"></p><br/><br/>
 
 	<p>Do You want to restart?</p><br/><br/>
-	<button class="yesButton" onclick="restartGame();">Yes</button>
-	<button class="noButton" onclick="restartApplication();">Hell no</button>
+	<button class="yesButton" onclick="restartGame(0);">Yes</button>
+	<button class="noButton" onclick="restartApplication(0);">Hell no</button>
 </div>
 
 <!Win div>
@@ -50,7 +50,8 @@
 	<p id="winMessage"></p>
 	<p id="scoreWinMessage"></p><br/><br/>
 	<p>Restart</p><br/><br/>
-	<button class="yesButton">Yes</button><button class="noButton">Hell no</button>
+	<button class="yesButton" onclick="restartGame(1);">Yes</button>
+	<button class="noButton" onclick="restartApplication(1);">Hell no</button>
 </div>
 
 <script>
@@ -93,16 +94,18 @@
 		}
 	};
 
-	var restartGame = function () {
+	var restartGame = function (source) {
 		document.body.removeChild(document.querySelector("canvas"));
-		document.querySelectorAll("div")[2].style.visibility = "hidden";
+		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
+				       : document.querySelectorAll("div")[3].style.visibility = "hidden";
 		main(name, mode);
 	};
 
-	var restartApplication = function () {
+	var restartApplication = function (source) {
 		menuSoundtrack.play();
 		document.body.removeChild(document.querySelector("canvas"));
-		document.querySelectorAll("div")[2].style.visibility = "hidden";
+		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
+				       : document.querySelectorAll("div")[3].style.visibility = "hidden";
 		document.querySelectorAll("div")[0].style.visibility = "visible";
 	};
 </script>

@@ -140,7 +140,7 @@ var showGameOver = function () {
 var showWinGame = function () {
 	document.querySelectorAll("div")[3].style.visibility = "visible";
 	document.querySelectorAll("div")[3].style.zIndex = "999";
-	document.querySelector("#winMessage").innerText = player.name + ", You have WIN";
+	document.querySelector("#winMessage").innerText = player.name + ", You have WON";
 	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
 	gameSoundtrack.pause();
 	stoped = true;
