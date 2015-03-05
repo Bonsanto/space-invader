@@ -113,11 +113,12 @@ canvas {
 	right: 0;
 }
 
-.bttYES{
+.yesButton{
 	display: inline-block;
 	position: relative;
 }
-.bttNO{
+
+.noButton{
 	display: inline-block;
 	position: relative;
 	margin-left: 40px;
