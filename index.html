@@ -35,7 +35,6 @@
 
 <!Game over div>
 <div style="visibility: hidden; width: 400px; height: 300px">
-
 	<p id="lostMessage"></p>
 
 	<p id="scoreMessage"></p><br/><br/>
@@ -92,6 +91,7 @@
 	};
 
 	var restartApplication = function () {
+		menuSoundtrack.play();
 		document.body.removeChild(document.querySelector("canvas"));
 		document.querySelectorAll("div")[2].style.visibility = "hidden";
 		document.querySelectorAll("div")[0].style.visibility = "visible";
