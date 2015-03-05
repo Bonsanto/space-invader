@@ -48,7 +48,9 @@
 <div style="visibility: hidden; width: 400px; height: 300px">
 
 	<p id="winMessage"></p>
+
 	<p id="scoreWinMessage"></p><br/><br/>
+
 	<p>Restart</p><br/><br/>
 	<button class="yesButton" onclick="restartGame(1);">Yes</button>
 	<button class="noButton" onclick="restartApplication(1);">Hell no</button>
@@ -97,7 +99,7 @@
 	var restartGame = function (source) {
 		document.body.removeChild(document.querySelector("canvas"));
 		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
-				       : document.querySelectorAll("div")[3].style.visibility = "hidden";
+				: document.querySelectorAll("div")[3].style.visibility = "hidden";
 		main(name, mode);
 	};
 
@@ -105,7 +107,7 @@
 		menuSoundtrack.play();
 		document.body.removeChild(document.querySelector("canvas"));
 		(source === 0) ? document.querySelectorAll("div")[2].style.visibility = "hidden"
-				       : document.querySelectorAll("div")[3].style.visibility = "hidden";
+				: document.querySelectorAll("div")[3].style.visibility = "hidden";
 		document.querySelectorAll("div")[0].style.visibility = "visible";
 	};
 </script>
