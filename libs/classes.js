@@ -89,12 +89,23 @@ var InputHandler = function () {
 	var _this = this;
 	document.addEventListener("keydown", function (event) {
 		_this.down[event.keyCode] = true;
-	});
+	}, false);
 
 	document.addEventListener("keyup", function (event) {
 		delete _this.down[event.keyCode];
 		delete _this.pressed[event.keyCode];
-	});
+	}, false);
+
+	document.querySelector("canvas").addEventListener("touchstart", function (event) {
+		event.preventDefault();
+		_this.down[32] = true;
+	}, false);
+
+	document.querySelector("canvas").addEventListener("touchend", function (event) {
+		event.preventDefault();
+		delete _this.down[32];
+		delete _this.pressed[32];
+	}, false);
 
 	this.isDown = function (key) {
 		return this.down[key];

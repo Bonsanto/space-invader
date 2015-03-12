@@ -1,4 +1,4 @@
-var paused, stoped, player, input, field, frames, spFrame, lvFrame,
+var paused, stopped, player, input, field, frames, spFrame, lvFrame,
 	alienSprite, tankSprite, citySprite,
 	aliens, direction, tank, bullets, cities, heart;
 
@@ -30,7 +30,7 @@ var main = function (name, mode) {
 
 var init = function () {
 	var rows = [1, 0, 0, 2, 2];
-	stoped = false;
+	stopped = false;
 	paused = false;
 	aliens = [];
 	bullets = [];
@@ -99,7 +99,7 @@ var run = function () {
 		update();
 		render();
 
-		if (!paused && !stoped)
+		if (!paused && !stopped)
 			window.requestAnimationFrame(loop, field.canvas);
 		else if (paused) {
 			var listener = setInterval(function () {
@@ -135,7 +135,7 @@ var showGameOver = function () {
 	document.querySelector("#scoreMessage").innerText = "Your score was: " + player.score;
 	defeatSound.play();
 	gameSoundtrack.pause();
-	stoped = true;
+	stopped = true;
 };
 
 var showWinGame = function () {
@@ -145,7 +145,7 @@ var showWinGame = function () {
 	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
 	victorySound.play();
 	gameSoundtrack.pause();
-	stoped = true;
+	stopped = true;
 };
 
 var update = function () {
