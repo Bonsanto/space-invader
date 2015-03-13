@@ -1,13 +1,3 @@
-//Data example
-/**
- * {
-*   "id": 0
-*   "userName": "Dakota",
-*   "score": 2000,
-*   "date": 12-1-1990
-* }
- * */
-
 //DB object manager.
 var dbManager = {
 	db: undefined,
