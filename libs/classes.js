@@ -141,6 +141,7 @@ var Player = function (n, s, m) {
 	this.name = n;
 	this.score = 0 || s;
 	this.modality = m;
+	this.date = (new Date()).toString();
 
 	this.updateScore = function (number) {
 		this.score += (0 || number);
