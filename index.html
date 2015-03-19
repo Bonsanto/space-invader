@@ -14,7 +14,7 @@
 	<br/><br/><br/><br/><br/><br/>
 	<label for="user">Enter your name</label><br/>
 	<input type="text" value="your name" id="user"
-		   onclick="this.value = '';" onchange="localStorage.setItem('name', this.value);"/><br/><br/><br/><br/>
+		   onclick="this.value = '';" onchange="this.value = this.value.slice(0,8); localStorage.setItem('name', this.value);"/><br/><br/><br/><br/>
 
 	<p>Difficulty</p>
 	<button onclick="modality(this)" style="background-color: dimgray">Easy</button>
