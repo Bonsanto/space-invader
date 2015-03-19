@@ -71,10 +71,13 @@ var init = function () {
 		},
 		hits: function (x, y) {
 			var sound = cityhit.cloneNode(true);
+			var data;
+
+			y -= this.y;
+			data = this.ctx.getImageData(x, y, 1, 1);
 			sound.volume = cityhit.volume;
 			sound.play();
-			y -= this.y;
-			var data = this.ctx.getImageData(x, y, 1, 1);
+
 			if (data["data"][3] !== 0) { //3 means opacity
 				this.generateDamage(x, y);
 				return true;
@@ -144,6 +147,7 @@ var showWinGame = function () {
 	document.querySelector("#winMessage").innerText = player.name + ", You have WON";
 	document.querySelector("#scoreWinMessage").innerText = "Your score was: " + player.score;
 	victorySound.play();
+	winVibration();
 	gameSoundtrack.pause();
 	stoped = true;
 };
@@ -157,7 +161,7 @@ var update = function () {
 		bullets.push(new Bullet(tank.x + tankSprite.w / 2 - 2, tank.y - 3, 0, -16, 4, 9, "steelblue", 1));
 	}
 	//limitations for the tank position
-		bullets.forEach(function (bullet, bulletIndex) {
+	bullets.forEach(function (bullet, bulletIndex) {
 		bullet.update();
 
 		//If the bullet is outside of the map
@@ -170,6 +174,7 @@ var update = function () {
 		if (cities.y < bullet.y + bullet.h / 2 && bullet.y + bullet.h / 2 < cities.y + cities.h) {
 			if (cities.hits(bullet.x, bullet.y + bullet.h / 2)) {
 				bullets.splice(bulletIndex, 1);
+				cityImpactVibration();
 			}
 		}
 
@@ -180,7 +185,7 @@ var update = function () {
 		}
 
 		//If the aliens touch the bottom
-		aliens.forEach(function(alien){
+		aliens.forEach(function (alien) {
 			if (alien.y + 30 >= field.h) showGameOver();
 		});
 

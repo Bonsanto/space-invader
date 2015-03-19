@@ -41,11 +41,17 @@ var Tank = function (sprite, x, y, speed) {
 
 	this.hitted = function (damageBullet) {
 		var sound = tankhit.cloneNode(true);
+
+		bulletImpactVibration();
 		sound.volume = tankhit.volume;
 		sound.play();
 		this.life -= damageBullet;
 
-		if (this.life === 0) showGameOver();
+
+		if (this.life === 0) {
+			loseVibration();
+			showGameOver();
+		}
 	};
 };
 
