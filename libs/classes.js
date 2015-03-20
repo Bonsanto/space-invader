@@ -87,6 +87,7 @@ var InputHandler = function () {
 	this.pressed = {};
 
 	var _this = this;
+	var watcher;
 	document.addEventListener("keydown", function (event) {
 		_this.down[event.keyCode] = true;
 	}, false);
@@ -96,15 +97,50 @@ var InputHandler = function () {
 		delete _this.pressed[event.keyCode];
 	}, false);
 
-	document.querySelector("canvas").addEventListener("touchstart", function (event) {
-		event.preventDefault();
-		_this.down[32] = true;
+	document.querySelector("canvas").addEventListener("mousedown", function (event) {
+		var canvas = this;
+
+		clearInterval(watcher);
+		watcher = setInterval(function () {
+			var touch = {
+				"x": event.pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
+			};
+
+			removeMovements();
+			_this.down[touch.x > 0 ? 68 : 65] = true;
+			_this.down[touch.x > 0 ? 68 : 65] = true;
+			console.log(touch.x);
+
+			if (touch.x < 10 && touch.x > -10) {
+				removeMovements();
+				clearInterval(watcher);
+			}
+
+			document.querySelector("canvas").addEventListener("mousemove", function (event) {
+				clearInterval(watcher);
+				watcher = setInterval(function () {
+					var touch = {
+						"x": event.pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
+					};
+
+					removeMovements();
+					_this.down[touch.x > 0 ? 68 : 65] = true;
+					_this.down[touch.x > 0 ? 68 : 65] = true;
+					console.log(touch.x);
+
+					if (touch.x < 10 && touch.x > -10) {
+						removeMovements();
+						clearInterval(watcher);
+					}
+				}, 50);
+			}, false);
+		}, 50);
 	}, false);
 
 	document.querySelector("canvas").addEventListener("touchend", function (event) {
 		event.preventDefault();
-		delete _this.down[32];
-		delete _this.pressed[32];
+		removeMovements();
+		clearInterval(watcher);
 	}, false);
 
 	this.isDown = function (key) {
@@ -116,6 +152,13 @@ var InputHandler = function () {
 		if (this.pressed[key]) return false;
 		else if (this.down[key]) return this.pressed[key] = true;
 		return false;
+	};
+
+	var removeMovements = function () {
+		delete _this.down[65];
+		delete _this.down[68];
+		delete _this.pressed[65];
+		delete _this.pressed[68];
 	};
 };
 

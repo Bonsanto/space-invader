@@ -40,7 +40,7 @@ var init = function () {
 	frames = 0;
 	heart = new Image();
 	heart.src = "pics/heart.png";
-	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 6);
+	tank = new Tank(tankSprite, (field.w - tankSprite.w) / 2, field.h - (30 + tankSprite.h), 10);
 	cities = {
 		canvas: {},
 		ctx: {},
