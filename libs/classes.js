@@ -97,50 +97,66 @@ var InputHandler = function () {
 		delete _this.pressed[event.keyCode];
 	}, false);
 
-	document.querySelector("canvas").addEventListener("mousedown", function (event) {
-		var canvas = this;
-
+	document.querySelector("canvas").addEventListener("touchstart", function (event) {
+		event.preventDefault();
 		clearInterval(watcher);
+
+		var canvas = this;
+		var touches = event.changedTouches;
+
+		//alert(touches[0].pageX);
+
 		watcher = setInterval(function () {
 			var touch = {
-				"x": event.pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
+				"x": touches[0].pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
 			};
 
 			removeMovements();
 			_this.down[touch.x > 0 ? 68 : 65] = true;
 			_this.down[touch.x > 0 ? 68 : 65] = true;
-			console.log(touch.x);
+			//alert(canvas.offsetLeft);
+			//alert(canvas.offsetLeft);
 
 			if (touch.x < 10 && touch.x > -10) {
 				removeMovements();
 				clearInterval(watcher);
 			}
-
-			document.querySelector("canvas").addEventListener("mousemove", function (event) {
-				clearInterval(watcher);
-				watcher = setInterval(function () {
-					var touch = {
-						"x": event.pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
-					};
-
-					removeMovements();
-					_this.down[touch.x > 0 ? 68 : 65] = true;
-					_this.down[touch.x > 0 ? 68 : 65] = true;
-					console.log(touch.x);
-
-					if (touch.x < 10 && touch.x > -10) {
-						removeMovements();
-						clearInterval(watcher);
-					}
-				}, 50);
-			}, false);
 		}, 50);
+
+	}, false);
+
+	document.querySelector("canvas").addEventListener("touchmove", function (event) {
+		event.preventDefault();
+		clearInterval(watcher);
+
+		var canvas = this;
+		var touches = event.changedTouches;
+
+		//alert(touches[0].pageX);
+
+		watcher = setInterval(function () {
+			var touch = {
+				"x": touches[0].pageX - tank.x - tankSprite.w / 2 - canvas.offsetLeft
+			};
+
+			removeMovements();
+			_this.down[touch.x > 0 ? 68 : 65] = true;
+			_this.down[touch.x > 0 ? 68 : 65] = true;
+			//alert(canvas.offsetLeft);
+			//alert(canvas.offsetLeft);
+
+			if (touch.x < 10 && touch.x > -10) {
+				removeMovements();
+				clearInterval(watcher);
+			}
+		}, 50);
+
 	}, false);
 
 	document.querySelector("canvas").addEventListener("touchend", function (event) {
 		event.preventDefault();
-		removeMovements();
 		clearInterval(watcher);
+		removeMovements();
 	}, false);
 
 	this.isDown = function (key) {
